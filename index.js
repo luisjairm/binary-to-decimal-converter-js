@@ -4,16 +4,29 @@ const resultDiv = document.querySelector('#result')
 
 const isBinary = (num) =>{
 
-  const regex = /^([01]*)1$/
-  return true
-  // return regex.test(num)
+  const regex = /^[01]+$/
+  return regex.test(num)
 }
 
 const error = () => { 
+  resultDiv.classList.remove('result')
+  resultDiv.classList.add('errorResult')
+
+  valueForm.classList.remove('value')
+  valueForm.classList.add('valueError')
+  
+  
   resultDiv.innerText = `${valueForm.value} no es un numero binario`
  }
 
  const success = (result) => { 
+
+   resultDiv.classList.remove('errorResult')
+  resultDiv.classList.add('result')
+
+  valueForm.classList.remove('valueError')
+  valueForm.classList.add('value')
+
   resultDiv.innerText = `${result.steps} = ${result.totalResult}`
   }
 
@@ -23,11 +36,11 @@ const error = () => {
   let totalResult = 0
   let steps = ''
   while(length > 0){
-    let step = valueArr[length - 1] * Math.pow(2, length - 1) 
+    let stepResult = valueArr[length - 1] * Math.pow(2, length - 1) 
     // console.log(`(${valueArr[length - 1]} * 2^${length - 1}) + `);
     steps += `+ (${valueArr[length - 1]} * 2^${length - 1}) `
 
-    totalResult += step
+    totalResult += stepResult
    
 
     length--
